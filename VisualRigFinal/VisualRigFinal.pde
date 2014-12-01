@@ -17,6 +17,7 @@ float angle;
 boolean midi1;
 boolean midi2;
 float c;
+float backgroundC;
 
 // Cube count-lower/raise to test performance
 int limit = 500;
@@ -50,9 +51,9 @@ void draw () {
   int value = 0;
 
   myBus.sendControllerChange(channel, number, value); // Send a controllerChange\
-  
-  
-  background (0);
+
+
+  background (0, 0, backgroundC);
 
   if (midi1) {
 
@@ -65,25 +66,6 @@ void draw () {
   }
 
   if (keyPressed) {
-
-
-    if (key == 'b' || key == 'B') {
-      visualOne.makeShape();
-    }
-
-
-
-    if (key == 'v' || key == 'V') {
-      visualTwo.makeShape();
-    }
-
-
-
-    if (key == 'n' || key == 'N') {
-      background(30, 30, 150);
-    }
-
-
 
     if (key == 'c' || key == 'C') {
       /*
@@ -119,17 +101,10 @@ void draw () {
 void noteOn(int channel, int pit, int vel) {
 
   if (pit == 60) {
-    //background (0);
     midi1 = true;
   }
-  // 
-  // if (pit ==61) {
-  //   background (0);
-  //  //visualOne.makeShape();
-  // }
 
   if (pit == 61) {
-    //background (0);
     midi2 = true;
   }
 }
@@ -139,25 +114,16 @@ void noteOff(Note note) {
   midi1=false;
 
   midi2=false;
-
-  //  int pit = note.getPitch();
-  //
-  //  fill(255,pit*2,pit*2,pit*2);
-  //  stroke(255,pit);
-  //  ellipse(pit*5,pit*5,30,30);
 }
 
 void controllerChange(int channel, int number, int value) {
 
-//  println("Controller Change:");
-//  println("--------");
-//  println("Channel:"+channel);
-//  println("Number:"+number);
-//  println("Value:"+value);
-  
   if (number == 13) {
-  c = map (float(value), 0, 127, 120, 0);
+    c = map (float(value), 0, 127, 120, 0);
+  }
+
+  if (number == 1) {
+    backgroundC = map (float(value), 0, 127, 255, 0);
   }
 }
-
 

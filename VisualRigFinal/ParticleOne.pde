@@ -1,5 +1,5 @@
 /* Code Taken from Processing Examples - Space Junk
-*/
+ */
 
 class ParticleOne {
 
@@ -15,7 +15,6 @@ class ParticleOne {
     this.shiftX = shiftX;
     this.shiftY = shiftY;
     this.shiftZ = shiftZ;
-
   }
 
   // Main cube drawing method, which looks 
