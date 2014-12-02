@@ -1,28 +1,30 @@
+//sphere shape
+
 class VisualOne {
 
   float acceleration = 0;
-  float sphereSize = 200;
-
 
   void makeShape () {
 
+    //add acceleration
     acceleration +=0.03;
+
     pushMatrix();
-    translate(width/2, height/2, 0);
+    translate(width/2, height/2, 1);
 
-    noStroke();
-    colorMode(HSB, 200);
-    for (int i = 0; i < 100; i++) {
-      for (int j = 0; j < 100; j++) {
-        stroke(i*10, j, 100);
-        point(i, j);
-      }
-    }
-
+    //movement
     rotateY(acceleration);
-    fill(0, backgroundC, 0);
-    sphereDetail(30);
-    sphere (sphereSize);
+
+    //color and stroke details
+    colorMode(RGB, 255);
+    strokeWeight(3);
+    stroke(200, c*4, c*3);
+    noFill();
+
+    //shape details
+    sphereDetail(12);
+    sphere (shapeSize*0.95);
+
     popMatrix();
   }
 }

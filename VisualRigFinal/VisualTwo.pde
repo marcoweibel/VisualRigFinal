@@ -1,26 +1,31 @@
+//cube shape
+
 class VisualTwo {
 
   float acceleration = 0;
-  float boxSize = 200;
 
 
   void makeShape () {
 
+    //add acceleration
     acceleration +=0.03;
+    
     pushMatrix();
-    translate(width/2, height/2, 0);
+    translate(width/2, height/2, 3);
+    
+    //movement
     rotateX(acceleration);
     rotateY(acceleration);
 
-    colorMode(RGB, 200);
-    for (int i = 0; i < 100; i++) {
-      for (int j = 0; j < 100; j++) {
-        stroke(i, j, 100);
-        point(i, j);
-      }
-    }
-    fill(c*2, c*0.5, c/0.4);
-    box (boxSize);
+    //color and stroke detail
+    colorMode(RGB, 255);
+    strokeWeight (3);
+    stroke(200, c*4, c*3);
+    noFill();
+    
+    //shape detail
+    box (shapeSize*1.2);
+    
     popMatrix();
   }
 }
