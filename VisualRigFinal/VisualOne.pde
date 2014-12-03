@@ -14,6 +14,7 @@ class VisualOne {
 
     //movement
     rotateY(acceleration);
+    rotateZ(0);
 
     //color and stroke details
     colorMode(RGB, 255);

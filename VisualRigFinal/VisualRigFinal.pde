@@ -15,18 +15,23 @@ VisualThree visualThree;
 // Used for oveall rotation
 float angle;
 
-boolean midi5;
-
 boolean midi1Off;
 boolean midi2Off;
 boolean midi3Off;
 boolean midi4Off;
+boolean midi9Off;
 
 boolean midi1Pressed;
 boolean midi2Pressed;
 boolean midi3Pressed;
 boolean midi4Pressed;
+boolean midi9Pressed;
 
+boolean midi5;
+boolean midi6;
+boolean midi7;
+boolean midi8;
+boolean midi13;
 
 
 float c;
@@ -56,30 +61,36 @@ void setup () {
     int(random(-140, 140)), int(random(-140, 140)));
 
     // List all available Midi devices on STDOUT. This will show each device's index and name.
-    MidiBus.list();
+//    MidiBus.list();
     myBus = new MidiBus(this, 0, 1);
   }
 
   //initiate
-  midi5=false;
-
   midi1Off=false;
   midi2Off=false;
   midi3Off=false;
   midi4Off=false;
+  midi9Off=false;
 
   midi1Pressed=false;
   midi2Pressed=false;
   midi3Pressed=false;
   midi4Pressed=false;
+  midi9Pressed=false;
+
+  midi5=false;
+  midi6=false;
+  midi7=false;
+  midi8=false;
+  midi13=false;
 }
 
 void draw () {
-  int channel = 0;
-  int number = 0;
-  int value = 0;
-
-  myBus.sendControllerChange(channel, number, value); // Send a controllerChange\
+//  int channel = 0;
+//  int number = 0;
+//  int value = 0;
+//
+//  myBus.sendControllerChange(channel, number, value); // Send a controllerChange\
 
   colorMode(HSB, 180, 150, 100, 180);
   background (backgroundC*0.7, backgroundC*0.5, backgroundC);
@@ -104,36 +115,76 @@ void draw () {
     visualOne.makeShape();
   }
 
-  if (keyPressed) {
+  if (midi6) {
+    visualTwo.makeShape();
+  }
 
-    if (key == 'c' || key == 'C') {
-      /*
+  if (midi7) {
+    visualThree.makeShape();
+  }
+
+  if (midi8) {
+    backgroundChange();
+  }
+
+  if (midi9Off) {
+
+    /*
         Code is from Processing Examples - Space Junk 
-       */
-      // Set up some different colored lights
-      pointLight(51, 102, 255, 65, 60, 100); 
-      pointLight(200, 40, 60, -65, -60, -150);
+     */
+    // Set up some different colored lights
+    pointLight(51, 102, 255, 65, 60, 100); 
+    pointLight(200, 40, 60, -65, -60, -150);
 
-      // Raise overall light in scene 
-      ambientLight(70, 70, 10); 
+    // Raise overall light in scene 
+    ambientLight(70, 70, 10); 
 
-      // Center geometry in display windwow.
-      // you can changlee 3rd argument ('0')
-      // to move block group closer(+) / further(-)
-      translate(width/2, height/2, -200 + mouseX * 0.65);
+    // Center geometry in display windwow.
+    // you can changlee 3rd argument ('0')
+    // to move block group closer(+) / further(-)
+    translate(width/2, height/2, -200 + mouseX * 0.65);
 
-      // Rotate around y and x axes
-      rotateY(radians(angle));
-      rotateX(radians(angle));
+    // Rotate around y and x axes
+    rotateY(radians(angle));
+    rotateX(radians(angle));
 
-      // Draw cubes
-      for (int i = 0; i < particleOne.length; i++) {
-        particleOne[i].drawCube();
-      }
-
-      // Used in rotate function calls above
-      angle += 0.6;
+    // Draw cubes
+    for (int i = 0; i < particleOne.length; i++) {
+      particleOne[i].drawCube();
     }
+
+    // Used in rotate function calls above
+    angle += 0.6;
+  }
+  
+    if (midi13) {
+
+    /*
+        Code is from Processing Examples - Space Junk 
+     */
+    // Set up some different colored lights
+    pointLight(51, 102, 255, 65, 60, 100); 
+    pointLight(200, 40, 60, -65, -60, -150);
+
+    // Raise overall light in scene 
+    ambientLight(70, 70, 10); 
+
+    // Center geometry in display windwow.
+    // you can changlee 3rd argument ('0')
+    // to move block group closer(+) / further(-)
+    translate(width/2, height/2, -200 + mouseX * 0.65);
+
+    // Rotate around y and x axes
+    rotateY(radians(angle));
+    rotateX(radians(angle));
+
+    // Draw cubes
+    for (int i = 0; i < particleOne.length; i++) {
+      particleOne[i].drawCube();
+    }
+
+    // Used in rotate function calls above
+    angle += 0.6;
   }
 }
 
@@ -172,7 +223,32 @@ void noteOn(int channel, int pit, int vel) {
   if (pit == 56) {
     midi5 = true;
   }
-}  
+
+  if (pit == 57) {
+    midi6 = true;
+  }
+
+  if (pit == 58) {
+    midi7 = true;
+  }
+  if (pit == 59) {
+    midi8 = true;
+  }
+
+
+  // Second row of MIDI controller buttons - Left to Right
+  if (pit == 52) {
+    if (midi9Pressed == false) {
+      midi9Pressed = true;
+      midi9Off=!midi9Off;
+    }
+  }
+
+  //First row of MIDI controller buttons - Left to Right
+  if (pit == 48) {
+    midi13 = true;
+  }
+}
 
 
 void noteOff(Note note) {
@@ -183,6 +259,13 @@ void noteOff(Note note) {
   midi4Pressed = false;
 
   midi5 = false;
+  midi6 = false;
+  midi7 = false;
+  midi8 = false;
+
+  midi9Pressed = false;
+  
+  midi13 = false;
 }
 
 void controllerChange(int channel, int number, int value) {

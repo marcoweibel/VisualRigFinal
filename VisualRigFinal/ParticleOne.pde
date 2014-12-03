@@ -22,6 +22,11 @@ class ParticleOne {
   // just a bunch of rectangles drawn for 
   // each cube face
   void drawCube() {
+
+  colorMode(RGB, 180, 150, 100, 180);
+  fill (c*0.7, c*0.5, c);
+    noFill();
+
     beginShape(QUADS);
     // Front face
     vertex(-w/2 + shiftX, -h/2 + shiftY, -d/2 + shiftZ); 
