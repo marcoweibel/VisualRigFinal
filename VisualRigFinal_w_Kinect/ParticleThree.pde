@@ -1,10 +1,10 @@
 class ParticleThree {
-  float x;
-  float y;
-  float xSpeed;
+  float x; //x position
+  float y; //y position
+  float xSpeed; 
   float ySpeed;
 
-  float partSize;
+  float partSize; // size of Particle
 
   ParticleThree() {
     x = random (width) ;
@@ -16,8 +16,8 @@ class ParticleThree {
   }
 
   void movement() {
-    x += xSpeed;
-    y += ySpeed;
+    x += xSpeed; //add velocity to X
+    y += ySpeed; //add velocity to Y
   }
 
   void updateShape() {
@@ -26,7 +26,7 @@ class ParticleThree {
 
   void collision() {
 
-    float r = partSize/2;
+    float r = partSize/2; 
 
     if ( (x<r) || (x>width-r)) {
       xSpeed *= -1;

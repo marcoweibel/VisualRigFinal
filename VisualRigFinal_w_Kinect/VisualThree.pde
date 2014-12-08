@@ -24,20 +24,20 @@ class VisualThree {
     //shape details
     beginShape();
     vertex(-shapeSize*0.75, -shapeSize*0.75, -shapeSize*0.75);
-    vertex( shapeSize*0.75, -shapeSize*0.75, -shapeSize*0.75);
-    vertex(   0, 0, shapeSize*0.75);
+    vertex(shapeSize*0.75, -shapeSize*0.75, -shapeSize*0.75);
+    vertex(0, 0, shapeSize*0.75);
 
-    vertex( shapeSize*0.75, -shapeSize*0.75, -shapeSize*0.75);
-    vertex( shapeSize*0.75, shapeSize*0.75, -shapeSize*0.75);
-    vertex(   0, 0, shapeSize*0.75);
+    vertex(shapeSize*0.75, -shapeSize*0.75, -shapeSize*0.75);
+    vertex(shapeSize*0.75, shapeSize*0.75, -shapeSize*0.75);
+    vertex(0, 0, shapeSize*0.75);
 
-    vertex( shapeSize*0.75, shapeSize*0.75, -shapeSize*0.75);
+    vertex(shapeSize*0.75, shapeSize*0.75, -shapeSize*0.75);
     vertex(-shapeSize*0.75, shapeSize*0.75, -shapeSize*0.75);
-    vertex(   0, 0, shapeSize*0.75);
+    vertex(0, 0, shapeSize*0.75);
 
     vertex(-shapeSize*0.75, shapeSize*0.75, -shapeSize*0.75);
     vertex(-shapeSize*0.75, -shapeSize*0.75, -shapeSize*0.75);
-    vertex(   0, 0, shapeSize*0.75);
+    vertex(0, 0, shapeSize*0.75);
     endShape();
     
     popMatrix();
