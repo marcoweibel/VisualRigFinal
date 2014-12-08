@@ -11,6 +11,8 @@ VisualOne visualOne;
 VisualTwo visualTwo;
 VisualThree visualThree;
 
+ParticleTwo particleTwo;
+
 
 // Used for oveall rotation
 float angle;
@@ -32,10 +34,12 @@ boolean midi6;
 boolean midi7;
 boolean midi8;
 boolean midi13;
+boolean midi14;
 
 
 float c;
 float backgroundC;
+float particleZoom;
 float shapeSize = 100;
 
 
@@ -53,6 +57,9 @@ void setup () {
   visualOne = new VisualOne();
   visualTwo = new VisualTwo();
   visualThree = new VisualThree();
+  
+  particleTwo = new ParticleTwo();
+  
 
   // Instantiate cubes, passing in random vals for size and postion
   for (int i = 0; i < particleOne.length; i++) {
@@ -83,16 +90,12 @@ void setup () {
   midi7=false;
   midi8=false;
   midi13=false;
+  midi14=false;
 }
 
 void draw () {
-//  int channel = 0;
-//  int number = 0;
-//  int value = 0;
-//
-//  myBus.sendControllerChange(channel, number, value); // Send a controllerChange\
 
-  colorMode(HSB, 180, 150, 100, 180);
+  colorMode(HSB, 255, 255, 255);
   background (backgroundC*0.7, backgroundC*0.5, backgroundC);
 
   if (midi1Off) {
@@ -142,7 +145,7 @@ void draw () {
     // Center geometry in display windwow.
     // you can changlee 3rd argument ('0')
     // to move block group closer(+) / further(-)
-    translate(width/2, height/2, -200 + mouseX * 0.65);
+    translate(width/2, height/2, -200 + particleZoom * 0.65);
 
     // Rotate around y and x axes
     rotateY(radians(angle));
@@ -156,6 +159,7 @@ void draw () {
     // Used in rotate function calls above
     angle += 0.6;
   }
+  
   
     if (midi13) {
 
@@ -172,7 +176,7 @@ void draw () {
     // Center geometry in display windwow.
     // you can changlee 3rd argument ('0')
     // to move block group closer(+) / further(-)
-    translate(width/2, height/2, -200 + mouseX * 0.65);
+    translate(width/2, height/2, -200 + particleZoom * 0.65);
 
     // Rotate around y and x axes
     rotateY(radians(angle));
@@ -186,6 +190,13 @@ void draw () {
     // Used in rotate function calls above
     angle += 0.6;
   }
+  
+  if (midi14) {
+    particleTwo.drawParticles();
+    
+  }
+    
+
 }
 
 void noteOn(int channel, int pit, int vel) {
@@ -248,6 +259,10 @@ void noteOn(int channel, int pit, int vel) {
   if (pit == 48) {
     midi13 = true;
   }
+  
+  if(pit == 49) {
+    midi14 = true;
+  }
 }
 
 
@@ -266,16 +281,21 @@ void noteOff(Note note) {
   midi9Pressed = false;
   
   midi13 = false;
+  midi14 = false;
 }
 
 void controllerChange(int channel, int number, int value) {
 
   if (number == 13) {
-    c = map (float(value), 0, 127, 120, 0);
+    c = map (float(value), 0, 127, 100, 0);
   }
 
   if (number == 12) {
     shapeSize = map (float(value), 0, 127, 400, 200);
+  }
+  
+  if (number == 11) {
+    particleZoom = map (float(value), 0, 127, width-200, width/3+100);
   }
 
   if (number == 1) {
@@ -285,6 +305,6 @@ void controllerChange(int channel, int number, int value) {
 
 void backgroundChange () {
 
-  background (0, 0, 255);
+  background (255);
 }
 

@@ -23,11 +23,12 @@ class ParticleOne {
   // each cube face
   void drawCube() {
 
-//  colorMode(RGB, 250, 200, 220, 180);
-  stroke (c*2+40, c*3+80, c*4+20);
-  strokeWeight (2);
+    stroke (c*2+40, c*4+80, c*2+40);
+    strokeWeight (2);
     noFill();
 
+
+    pushMatrix();
     beginShape(QUADS);
     // Front face
     vertex(-w/2 + shiftX, -h/2 + shiftY, -d/2 + shiftZ); 
@@ -66,10 +67,11 @@ class ParticleOne {
     vertex(-w/2 + shiftX, h + shiftY, d + shiftZ); 
 
     endShape(); 
+    popMatrix();
 
     // Add some rotation to each box for pizazz.
-    rotateY(radians(5));
-    rotateX(radians(5));
+    rotateY(radians(10));
+    rotateX(radians(10));
     rotateZ(radians(5));
   }
 }
