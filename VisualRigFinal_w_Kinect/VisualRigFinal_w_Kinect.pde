@@ -9,7 +9,6 @@
 
 /* Import My Libraries*/
 import themidibus.*;
-import processing.opengl.*; // opengl
 import SimpleOpenNI.*; // kinect
 import blobDetection.*; // blobs
 import java.awt.Polygon; // this is a regular java import so we can use and extend the polygon class (see PolygonBlob)
